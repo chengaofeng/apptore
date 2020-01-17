@@ -18,6 +18,6 @@ WORKDIR /usr/src
 
 #CMD java -jar ${OPTS} ${TARGET_JAR} --logging.level.root=${LOGGING_LEVEL}
 
-RUN echo "java -jar \${OPTS} \${TARGET_JAR} --logging.level.root=\${LOGGING_LEVEL}" > start.sh \
+RUN echo "java -jar \${OPTS} \${TARGET_JAR} --logging.level.root=\${LOGGING_LEVEL} \${CUSTOM_PARAMS}" > start.sh \
              && chmod 777 start.sh
 CMD ./start.sh
