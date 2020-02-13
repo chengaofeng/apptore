@@ -1,5 +1,20 @@
-# apptore
+## apptore
 利用fabric8通过client操作kubernetes，一种通过kubernetes集群的pki，一种利用serviceaccount
+
+
+### 主要思路
+1. 创建spring boot工程，依赖fabric8
+
+1. 工程启动时创建serviceaccount，通过ClusterRoleBinding绑定到cluster-admin
+
+1. 将spring-boot打成镜像
+
+1. 将serviceAccount赋给对应的镜像
+
+1. 工程启动时通过serviceAccount挂载到镜像内部的/var/run/secrets/kubernetes.io/serviceaccount/ca.crt和/var/run/secrets/kubernetes.io/serviceaccount/token初始化一个DefaultKubernetesClient
+
+1. 通过DefaultKubernetesClient和k8s集群的kube-apiserver进行交互
+
 
 [使用PKI](https://github.com/chengaofeng/apptore/wiki/cafile_appstore.yml)  
 [使用ServiceAccount](https://github.com/chengaofeng/apptore/wiki/serviceaccount_appstore.yml)
@@ -11,5 +26,4 @@ appstore-business工程会通过maven插件spring-boot-maven-plugin打成一个�
 
 kubernetes的描述文件，通过CUSTOM_PARAMS传入认证文件的地址，进行认证
   
-
 
